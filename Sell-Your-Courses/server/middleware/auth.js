@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtokens');
+const jwt = require('jsonwebtoken');
 const SECRET = 'Ni!l1ay/Patel1';
 
 const authenticateJwt = (req, res, next) => {
-    const authHeader = req.headers.Authorisation;
+    const authHeader = req.headers.authorization;
     if(authHeader){
         const token = authHeader.split(' ')[1];
         jwt.verify(token, SECRET, (err, user) => {
@@ -15,6 +15,6 @@ const authenticateJwt = (req, res, next) => {
     }else{
         res.sendStatus(401);
     }
-}
+};
 
 module.exports = {authenticateJwt, SECRET};

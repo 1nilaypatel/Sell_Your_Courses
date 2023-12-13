@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const adminRouter = reqiure('./routes/admin.js');
+const adminRouter = require('./routes/admin.js');
 const userRouter = require('./routes/user.js');
 
 const app = express();

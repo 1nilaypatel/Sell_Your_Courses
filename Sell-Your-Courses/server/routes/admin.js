@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const {User, Admin, Course} = require('../db');
 const {authenticateJwt, SECRET} = require('../middleware/auth.js');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 router.get("/me", authenticateJwt, async (req, res) => {
@@ -30,7 +31,7 @@ router.post("/login", async (req, res) => {
     const {username, password} = req.headers;
     const admin = await Admin.findOne({username, password});
     if(admin){
-        const token = jwt.sign({username, role: 'admin'}, SECRET, {expireIn: '1h'});
+        const token = jwt.sign({username, role: 'admin'}, SECRET, {expiresIn: '1h'});
         res.json({message: "Logged in successfully", token});
     }else{
         res.status(403).json({ message: "Invalid username or password" });
@@ -62,4 +63,4 @@ router.get("/courses/:courseId", authenticateJwt, async (req, res) => {
     res.json({course});
 });
 
-module.exports = {router};
+module.exports = router
