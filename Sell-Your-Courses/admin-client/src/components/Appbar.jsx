@@ -2,7 +2,7 @@ import {Typography, Button} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import {useSetRecoilState, useRecoilValue} from 'recoil';
 import {userState} from "../store/atoms/user.js";
-import {isUserLoading} from "../store/selectors.isUserLoading";
+import {isUserLoading} from "../store/selectors/isUserLoading";
 import {userEmailState} from "../store/selectors/userEmail";
 
 function Appbar(){

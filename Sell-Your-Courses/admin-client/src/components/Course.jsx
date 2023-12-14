@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
 import {BASE_URL} from '../config.js';
-import {Loading} from './Loading';
+import Loading from './Loading.jsx';
 import {courseState} from '../store/atoms/course';
 import {useSetRecoilState, useRecoilValue, useRecoilState} from 'recoil';
 import {courseTitle, coursePrice, isCourseLoading, courseImage} from '../store/selectors/course';

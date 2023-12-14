@@ -1,10 +1,11 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import axios from 'axios';
 import {RecoilRoot, useSetRecoilState} from 'recoil';
-import useEffect from 'react';
+import {useEffect} from 'react';
 import {BASE_URL} from './config.js';
 import {userState} from './store/atoms/user.js';
 
+import Appbar from './components/Appbar.jsx';
 import Signup from './components/Signup.jsx';
 import Signin from './components/Signin.jsx';
 import AddCourse from './components/AddCourse.jsx';
