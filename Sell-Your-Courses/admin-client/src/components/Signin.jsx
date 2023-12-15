@@ -45,16 +45,17 @@ function Signin(){
           variant={"contained"}
           onClick={async() => {
             const response = await axios.post(`${BASE_URL}/admin/login`, {
-              username: email,
-              password: password
+
             },{
               headers:{
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                "username": email,
+                "password": password
               }
             });
             let data = response.data;
             localStorage.setItem("token", data.token);
-            setUser({userEmai: email, isLoading: false});
+            setUser({userEmail: email, isLoading: false});
             navigate("/courses");
           }}
         >Signin</Button>

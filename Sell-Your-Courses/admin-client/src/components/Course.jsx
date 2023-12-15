@@ -104,7 +104,7 @@ function UpdateCard(){
         />
 
         <TextField
-          value={image}
+          value={price}
           style={{marginBottom: 10}}
           onChange={(e) => {
               setPrice(e.target.value)

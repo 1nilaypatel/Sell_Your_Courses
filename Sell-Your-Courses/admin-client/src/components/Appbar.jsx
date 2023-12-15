@@ -46,6 +46,7 @@ function Appbar(){
               isLoadin: false,
               userEmail: null
             })
+            navigate("/")
           }}
         >Logout</Button>
       </div>
