@@ -43,7 +43,7 @@ function Appbar(){
           onClick={() => {
             localStorage.setItem("token", null);
             setUser({
-              isLoadin: false,
+              isLoading: false,
               userEmail: null
             })
             navigate("/")
