@@ -44,16 +44,12 @@ function InitUser(){
         }
       })
       if(response.data.username){
-        setUser({
-          isLoading: false,
-          userEmail: response.data.username
-        })
+        setUser({isLoading: false, userEmail: response.data.username})
+      }else{
+        setUser({isLoading: false, userEmail: null})
       }
     }catch(err){
-      setUser({
-        isLoading: false,
-        userEmail: null
-      })
+      setUser({isLoading: false, userEmail: null})
     }
   };
 

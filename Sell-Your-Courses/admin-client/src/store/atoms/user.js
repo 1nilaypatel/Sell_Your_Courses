@@ -4,6 +4,6 @@ export const userState = atom({
   key: 'userState',
   default:{
     isLoading: true,
-    course: null
+    userEmail: null
   }
 });

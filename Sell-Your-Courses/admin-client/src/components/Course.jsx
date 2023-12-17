@@ -17,12 +17,12 @@ function Course(){
     axios.get(`${BASE_URL}/admin/courses/${courseId}`, {
       method: "GET",
       headers: {
-        "Authorization": "Bearer " + localStorage.getItem("token")
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
       }
     }).then((res) => {
       setCourse({isLoading: false, course: res.data.course});
     }).catch((err) => {
-      setCourse({isLoading: false, course: null});
+      setCourse({isLoading: true, course: null});
     });
   }, []);
 
@@ -126,7 +126,7 @@ function UpdateCard(){
             }, {
               headers: {
                 "Content-type": "application/json",
-                "Authorization": "Bearer " + localStorage.getItem("token")
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
               }
             });
             let updatedCourse = {

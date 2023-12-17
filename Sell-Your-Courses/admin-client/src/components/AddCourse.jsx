@@ -9,8 +9,8 @@ function AddCourse(){
   const [image, setImage] = useState("");
   const [price, setPrice] = useState(0);
 
-  return <div style={{display: "flex", justifyContent: "center", minHeight: "80vh", flexDirection: "column"}}>
-    <div style={{display: "flex", justifyContent: "center"}}>
+  return <div>
+    <div style={{display: "flex", justifyContent: "center", paddingTop: "140px", }}>
       <Card variant={"outlined"} style={{width: 400, padding: 20, marginTop: 30, height: "100%"}}>
         <TextField
           style={{marginBottom: 10}}
@@ -50,6 +50,7 @@ function AddCourse(){
           fullWidth={true}
           label={"Price"}
           variant={"outlined"}
+          type={"number"}
         />
 
         <Button
@@ -61,10 +62,10 @@ function AddCourse(){
               description: description,
               imageLink: image,
               published: true,
-              price
+              price: price
             }, {
               headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token")
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
               }
             });
             alert("Added course!");

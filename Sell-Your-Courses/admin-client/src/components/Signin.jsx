@@ -1,5 +1,5 @@
 import {Card, Typography, Button, TextField} from '@mui/material';
-import { useState } from 'react';
+import {useState} from 'react';
 import axios from 'axios';
 import {BASE_URL} from '../config.js';
 import {useNavigate} from 'react-router-dom';
@@ -22,6 +22,7 @@ function Signin(){
     <div style={{display: "flex", justifyContent: "center"}}>
       <Card variant={"outlined"} style={{width: 400, padding: 20}}>
         <TextField 
+          style={{marginBottom: 20}}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -29,8 +30,9 @@ function Signin(){
           label={"Email"}
           variant={"outlined"}
         />
-        <br/><br/>
+        
         <TextField 
+          style={{marginBottom: 20}}
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -39,7 +41,7 @@ function Signin(){
           variant={"outlined"}
           type={"password"}
         />
-        <br/><br/>
+
         <Button
           size={"large"}
           variant={"contained"}

@@ -1,4 +1,5 @@
 import {Card, Typography, Button} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import {BASE_URL} from '../config.js';
@@ -35,13 +36,22 @@ function Course(props){
     <Typography textAlign={"center"} variant="subtitle1">{props.course.description}</Typography>
     <img src={props.course.imageLink} style={{width: 300}} ></img>
     <div style={{display: "flex", justifyContent: "center", marginTop: 20}}>
+      <div style={{marginRight: "10px"}}>
+        <Button 
+          variant="contained"
+          onClick={() => {
+            navigate("/course/" + props.course._id);
+          }}
+        >Edit</Button>
+      </div>
       <Button 
-        variant="contained" 
-        size="large" 
+        startIcon={<DeleteIcon/>}
+        color="error"
+        variant="contained"
         onClick={() => {
-          navigate("/course/" + props.course._id);
+          // navigate("/course/" + props.course._id);
         }}
-      >Edit</Button>
+      >Delete</Button>
     </div>
   </Card>
 }
