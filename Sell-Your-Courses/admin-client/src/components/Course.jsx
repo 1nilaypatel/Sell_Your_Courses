@@ -4,26 +4,26 @@ import {useParams} from 'react-router-dom';
 import axios from 'axios';
 import {BASE_URL} from '../config.js';
 import Loading from './Loading.jsx';
-import {courseState} from '../store/atoms/course';
+import {courseState} from '../store/atoms/course.js';
 import {useSetRecoilState, useRecoilValue, useRecoilState} from 'recoil';
-import {courseTitle, coursePrice, isCourseLoading, courseImage} from '../store/selectors/course';
+import {courseTitle, coursePrice, isCourseLoading, courseImage, courseDescription} from '../store/selectors/course';
 
 function Course(){
   let {courseId} = useParams();
   const setCourse = useSetRecoilState(courseState);
   const courseLoading = useRecoilValue(isCourseLoading);
 
-  useEffect(() => {
-    axios.get(`${BASE_URL}/admin/courses/${courseId}`, {
-      method: "GET",
+  const init = async () => {
+    const response = await axios.get(`${BASE_URL}/admin/courses/${courseId}`, {
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`
       }
-    }).then((res) => {
-      setCourse({isLoading: false, course: res.data.course});
-    }).catch((err) => {
-      setCourse({isLoading: true, course: null});
     });
+    setCourse({isLoading: false, course: response.data.course});
+  }
+
+  useEffect(() => {
+    init();
   }, []);
 
   if(courseLoading){
@@ -46,19 +46,17 @@ function Course(){
 function GrayTopper(){
   const title = useRecoilValue(courseTitle);
   return <div style={{height: 250, background: "#212121", top: 0, width: "100vw", zIndex: 0, marginBottom: -250}}>
-    <div style={{height: 250, display: "flex", justifyContent: "center", flexDirection: "column"}}>
-      <div>
-        <Typography style={{color: "white", fontWeight: 600}} variant={"h3"} textAlign={"center"}>
-          {title}
-        </Typography>
-      </div>
+    <div style={{height: 250, display: "flex", justifyContent: "center", alignItems: "center"}}>
+      <Typography style={{color: "white", fontWeight: 600}} variant={"h3"}>
+        {title}
+      </Typography>
     </div>
   </div>
 }
 
 function UpdateCard(){
   const[courseDetails, setCourse] = useRecoilState(courseState);
-  const[title, setTitle] = useState(courseDetails.course.title);
+  const[title, setTitle] = useState(useRecoilValue(courseTitle));
   const [description, setDescription] = useState(courseDetails.course.description);
   const [image, setImage] = useState(courseDetails.course.imageLink);
   const [price, setPrice] = useState(courseDetails.course.price);
@@ -112,17 +110,18 @@ function UpdateCard(){
           fullWidth={true}
           label={"Price"}
           variant={"outlined"}
+          type={"number"}
         />
         
         <Button
           variant="contained"
           onClick={async () => {
-            axios.put(`${BASE_URL}/admin/courses/` + courseDetails.course._id, {
+            axios.put(`${BASE_URL}/admin/courses/${courseDetails.course._id}`, {
               title: title,
               description: description,
               imageLink: image,
               published: true,
-              price
+              price: price
             }, {
               headers: {
                 "Content-type": "application/json",
@@ -130,11 +129,11 @@ function UpdateCard(){
               }
             });
             let updatedCourse = {
-              _id: courseDetails.course._id,
+              _id: courseDetails.course._id, // id will be same as previous
               title: title,
               description: description,
               imageLink: image,
-              price
+              price: price
             };
             setCourse({course: updatedCourse, isLoading: false});
           }}
@@ -148,29 +147,23 @@ function CourseCard(){
   const title = useRecoilValue(courseTitle);
   const imageLink = useRecoilValue(courseImage);
   const price = useRecoilValue(coursePrice);
+  const description = useRecoilValue(courseDescription);
 
   return <div style={{display: "flex",  marginTop: 50, justifyContent: "center", width: "100%"}}>
-    <Card style={{margin: 10, width: 350, minHeight: 200, borderRadius: 20, marginRight: 50, paddingBottom: 15, zIndex: 2}}>
-      <img src={imageLink} style={{width: 350}} ></img>
-      <div style={{marginLeft: 10}}>
+    <Card style={{margin: 10, marginRight: 50, width: 350, minHeight: 200, borderRadius: 20, paddingBottom: 15, zIndex: 2}}>
+      <div style={{ display: "flex" ,justifyContent: "center", flexDirection: "column", marginLeft: "25px", marginTop: "10px"}}>
         <Typography variant={"h5"}>
           {title}
         </Typography>
-        <Price />
+        <Typography variant={"subtitle1"}>
+          {description}
+        </Typography>
+        <Typography variant={"subtitle1"}>
+          <b>Rs {price} </b>
+        </Typography>
+        <img src={imageLink} style={{width: 300}} />
       </div>
     </Card>
-  </div>
-}
-
-function Price(){
-  const price = useRecoilValue(coursePrice);
-  return <div>
-    <Typography variant={"subtitle2"} style={{color: "gray"}}>
-      Price
-    </Typography>
-    <Typography variant={"subtitle1"}>
-      <b>Rs {price} </b>
-    </Typography>
   </div>
 }
 

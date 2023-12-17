@@ -10,7 +10,7 @@ function AddCourse(){
   const [price, setPrice] = useState(0);
 
   return <div>
-    <div style={{display: "flex", justifyContent: "center", paddingTop: "140px", }}>
+    <div style={{display: "flex", justifyContent: "center", paddingTop: "140px"}}>
       <Card variant={"outlined"} style={{width: 400, padding: 20, marginTop: 30, height: "100%"}}>
         <TextField
           style={{marginBottom: 10}}

@@ -31,7 +31,7 @@ function Courses(){
 function Course(props){
   const navigate = useNavigate();
 
-  return <Card style={{margin: 10, width: 300, minHeight: 200, padding: 20}}>
+  return <Card style={{margin: 10, width: 300, minHeight: 200, padding: 10}}>
     <Typography textAlign={"center"} variant="h5">{props.course.title}</Typography>
     <Typography textAlign={"center"} variant="subtitle1">{props.course.description}</Typography>
     <img src={props.course.imageLink} style={{width: 300}} ></img>

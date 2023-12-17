@@ -44,7 +44,18 @@ export const courseImage = selector({
   get: ({get}) => {
     const state = get(courseState);
     if(state.course){
-      return state.course.image;
+      return state.course.imageLink;
+    }
+    return "";
+  }
+});
+
+export const courseDescription = selector({
+  key: 'courseDescriptionState',
+  get: ({get}) => {
+    const state = get(courseState);
+    if(state.course){
+      return state.course.description;
     }
     return "";
   }

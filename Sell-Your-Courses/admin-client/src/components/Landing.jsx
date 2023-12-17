@@ -10,8 +10,8 @@ function Landing(){
   const userLoading = useRecoilValue(isUserLoading);
 
   return <div>
-    <Grid container style={{padding: "5vw"}}>
-      <Grid item xs={12} md={6} lg={6}>
+    <Grid container style={{padding: "4vw"}}>
+      <Grid item sm={12} md={4} lg={5}>
         <div style={{marginTop: 100}}>
           <Typography variant={"h2"}>
             Coursera Admin
@@ -40,8 +40,8 @@ function Landing(){
             </div>
           </div>}
         </div>
-      </Grid>
-      <Grid item xs={12} md={6} lg={6} style={{marginTop: 20}}>
+      </Grid> 
+      <Grid item sm={12} md={8} lg={7} style={{marginTop: 20}}>
         <img src={"/class.jpeg"} width={"100%"} />
       </Grid>
     </Grid>
