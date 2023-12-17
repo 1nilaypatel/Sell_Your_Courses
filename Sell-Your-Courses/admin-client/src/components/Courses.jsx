@@ -32,15 +32,20 @@ function Course(props){
   const navigate = useNavigate();
 
   return <Card style={{margin: 10, width: 300, minHeight: 200, padding: 10}}>
-    <Typography textAlign={"center"} variant="h5">{props.course.title}</Typography>
-    <Typography textAlign={"center"} variant="subtitle1">{props.course.description}</Typography>
-    <img src={props.course.imageLink} style={{width: 300}} ></img>
+    <Typography textAlign={"center"} variant="h5">
+      {props.course.title}
+    </Typography>
+    <Typography textAlign={"center"} variant="subtitle1">
+      {props.course.description}
+    </Typography>
+    <img src={props.course.imageLink} style={{width: 300}} />
+
     <div style={{display: "flex", justifyContent: "center", marginTop: 20}}>
       <div style={{marginRight: "10px"}}>
         <Button 
           variant="contained"
           onClick={() => {
-            navigate("/course/" + props.course._id);
+            navigate(`/course/${props.course._id}`);
           }}
         >Edit</Button>
       </div>
@@ -49,7 +54,7 @@ function Course(props){
         color="error"
         variant="contained"
         onClick={() => {
-          // navigate("/course/" + props.course._id);
+          
         }}
       >Delete</Button>
     </div>
